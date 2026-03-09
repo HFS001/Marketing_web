@@ -1,0 +1,112 @@
+/* Floating animation for Hero Image */
+@keyframes float {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-15px) scale(1.02); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+.hero-image img {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Base class for reveal elements */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+}
+
+html.js .reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Adding hover animations to cards and panels */
+.card, .info-panel, .spec-card, .info-block {
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  will-change: transform, box-shadow;
+}
+
+.card:hover, .info-panel:hover, .spec-card:hover, .info-block:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  border-color: rgba(111, 255, 233, 0.4);
+}
+
+/* Button primary advanced pulse/glow effect */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(111, 255, 233, 0.5); }
+  70% { box-shadow: 0 0 0 15px rgba(111, 255, 233, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(111, 255, 233, 0); }
+}
+
+.btn.primary {
+  animation: pulseGlow 2.5s infinite;
+  transition: all 0.3s ease;
+}
+
+.btn.primary:hover {
+  animation: none;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(111, 255, 233, 0.6);
+}
+
+.btn.secondary {
+  transition: all 0.3s ease;
+}
+
+.btn.secondary:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Pills & Badges hover */
+.pill-list li, .badge-list span {
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: default;
+}
+
+.pill-list li:hover, .badge-list span:hover {
+  background: var(--primary);
+  color: #01223c;
+  transform: translateY(-3px) scale(1.05);
+  border-color: var(--primary);
+  box-shadow: 0 5px 15px rgba(111, 255, 233, 0.2);
+}
+
+/* Checklist items slight slide right on hover */
+.checklist li {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.checklist li:hover {
+  transform: translateX(5px);
+  color: #fff;
+}
+
+/* Language selector hover */
+.lang-btn {
+  transition: all 0.3s ease;
+}
+
+.lang-btn:hover:not(.active) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(111, 255, 233, 0.2);
+}
+
+/* Form inputs focus animation */
+input, textarea {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  border: 1px solid transparent;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(111, 255, 233, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+}

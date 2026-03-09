@@ -358,3 +358,69 @@ if (form) {
 }
 
 applyLanguage(currentLang);
+
+// Modern Animations - Intersection Observer setup
+const selectorsToReveal = [
+  '.section-header', 
+  '.hero-text > *',
+  '.hero-image',
+  '.card', 
+  '.info-panel', 
+  '.spec-card', 
+  '.info-block', 
+  '.pill-list li', 
+  '.checklist li', 
+  '.badge-list span',
+  '.brochure-grid a',
+  '.contact-details .detail',
+  '.contact-form'
+];
+
+document.querySelectorAll(selectorsToReveal.join(', ')).forEach((el) => {
+  el.classList.add('reveal');
+});
+
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = entry.target;
+      let delay = 0;
+      
+      const parent = target.parentElement;
+      if (parent && (
+          parent.classList.contains('cards') ||
+          parent.classList.contains('overview-grid') ||
+          parent.classList.contains('specs-grid') ||
+          parent.classList.contains('pill-list') ||
+          parent.classList.contains('checklist') ||
+          parent.classList.contains('badge-list') ||
+          parent.classList.contains('brochure-grid') ||
+          parent.classList.contains('contact-details'))) {
+        const siblings = Array.from(parent.children);
+        const index = siblings.indexOf(target);
+        delay = index * 80;
+      } else if (parent && parent.classList.contains('hero-text')) {
+        const siblings = Array.from(parent.children);
+        const index = siblings.indexOf(target);
+        delay = index * 120; 
+      }
+
+      if (delay > 0) {
+        setTimeout(() => {
+          target.classList.add('active');
+        }, delay);
+      } else {
+        target.classList.add('active');
+      }
+      
+      observer.unobserve(target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
